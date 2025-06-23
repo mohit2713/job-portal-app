@@ -1,9 +1,28 @@
-# 🧑‍💼 Job Portal Web App
+# 🧑‍💼 Job Portal Web App (Developing Phase)
+# Demo link:
 
-A Full-stack job portal application built using **React (with Parcel)** on the frontend and **Node.js + Express** on the backend. This project is aimed at helping users view and apply for jobs, and companies to post job listings.
+
+A Full-stack job portal application built using **React (with Parcel)** on the frontend and **Node.js + Express + MongoDB** on the backend. This project is aimed at helping users view and apply for jobs, and companies to post job listings.
 
 ---
 
+## 🛠️ Tech Stack
+
+### ✅ Frontend (src/Components)
+- **React** – Component-based UI
+- **Parcel** – Bundler for fast dev builds
+- **Tailwind CSS** – Utility-first styling
+- **Fetch** – For making HTTP requests
+
+### ✅ Backend (server/)
+- **Node.js** – JavaScript runtime
+- **Express** – Minimal web framework for APIs
+- **mongoose**: Model MongoDB data in Node.
+- **CORS** – Cross-origin support
+- **dotenv** – Manage environment variables
+- **bcryptjs** – Hash passwords securely for storage.
+- **jsonwebtoken**: Create and verify user tokens.
+---
 ## 📌 Features
 
 - 🔍 View job listings
@@ -14,23 +33,7 @@ A Full-stack job portal application built using **React (with Parcel)** on the f
 
 ---
 
-## 🛠️ Tech Stack
-
-### ✅ Frontend (client/)
-- **React** – Component-based UI
-- **Parcel** – Bundler for fast dev builds
-- **Tailwind CSS** – Utility-first styling
-- **Fetch** – For making HTTP requests
-
-### ✅ Backend (server/)
-- **Node.js** – JavaScript runtime
-- **Express** – Minimal web framework for APIs
-- **CORS** – Cross-origin support
-- **dotenv** – Manage environment variables
-
----
-
-## Structure
+## Backend Structure
 
 server/
 ├── config/
