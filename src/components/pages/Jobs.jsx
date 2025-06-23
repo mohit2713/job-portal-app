@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+// const API = import.meta.env.VITE_API_URL;
 
 function Jobs() {
   const [jobs, setJobs] = useState([]);
+  console.log("https://job-portal-app.onrender.com");
 
   useEffect(() => {
-    fetch("http://localhost:5050/api/jobs")
+    fetch("https://job-portal-app-xfux.onrender.com/api/jobs")
       .then((res) => res.json())
       .then((data) => setJobs(data))
       .catch((err) => console.error("Failed to load jobs:", err));
