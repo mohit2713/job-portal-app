@@ -30,6 +30,22 @@ A Full-stack job portal application built using **React (with Parcel)** on the f
 
 ---
 
+## Structure
+
+server/
+├── config/
+│   └── db.js           # MongoDB connection setup
+├── models/
+│   ├── User.js         # Schema for users (candidates/recruiters)
+│   └── Job.js          # Schema for job posts
+├── routes/
+│   ├── auth.js         # Handles signup/login routes
+│   └── jobs.js         # Handles job listing/posting
+├── .env                # Stores MongoDB URI and secret key
+└── index.js            # Entry point - sets up server, routes, DB
+
+
+
 ## 🙋‍♂️ Author
 
 **Mohit Kashyap**

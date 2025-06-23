@@ -4,6 +4,8 @@ import PostJob from "./components/pages/PostJob";
 import Jobs from "./components/pages/Jobs";
 import Signup from "./components/pages/Signup";
 import Login from "./components/pages/Login";
+import About from "./components/pages/About";
+import Contact from "./components/pages/Contact";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -26,7 +28,7 @@ function App() {
 
   return (
     <>
-      <nav className="p-4 bg-gray-200 flex gap-4">
+      <nav className="p-4 bg-gray-200 flex gap-4 justify-end">
         <a href="/" className="text-blue-600">
           Home
         </a>
@@ -34,22 +36,33 @@ function App() {
           Post Job
         </a>
 
+        <a href="/about" className="text-blue-600">
+          About
+        </a>
+
+        <a href="/contact" className="text-blue-600">
+          Contact
+        </a>
+
         {!user && (
           <>
             <a href="/login" className="text-blue-600">
               Login
             </a>
-            <a href="/signup" className="text-blue-600">
+            {/* <a href="/signup" className="text-blue-600">
               Signup
-            </a>
+            </a> */}
           </>
         )}
         {user && (
           <>
-            <span className="ml-auto text-sm text-gray-600">
+            <span className="text-gray-600">
               Hi, {user.name} ({user?.role})
             </span>
-            <button onClick={handleLogout} className="text-red-600 ml-4">
+            <button
+              onClick={handleLogout}
+              className="text-red-600 ml-2 cursor-pointer"
+            >
               Logout
             </button>
           </>
@@ -76,6 +89,8 @@ function App() {
           />
           <Route path="/login" element={<Login setUser={setUser} />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       </Router>
     </>

@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function PostJob() {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     title: "",
     company: "",
@@ -29,6 +31,18 @@ function PostJob() {
       const data = await res.json();
       alert("✅ Job posted!");
       console.log(data);
+
+      // ✅ Clear the form
+      setForm({
+        title: "",
+        company: "",
+        location: "",
+        type: "",
+        description: "",
+      });
+
+      // ✅ Redirect to home page
+      navigate("/");
     } catch (err) {
       alert("❌ Failed to post job");
       console.error(err);

@@ -9,6 +9,10 @@ function Login({ setUser }) {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  const handleSignupRedirect = () => {
+    navigate("/signup"); // ✅ redirect to signup page
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -61,6 +65,15 @@ function Login({ setUser }) {
           Log In
         </button>
       </form>
+      <p className="mt-4 text-sm">
+        Don’t have an account?{" "}
+        <button
+          className="text-blue-600 cursor-pointer"
+          onClick={handleSignupRedirect}
+        >
+          Sign up here
+        </button>
+      </p>
     </div>
   );
 }
