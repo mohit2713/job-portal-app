@@ -15,7 +15,11 @@ connectDB(); // Will now use MONGO_URI from .env
 // ✅ Middlewares
 app.use(
   cors({
-    origin: ["http://localhost:1234", "https://job-portal-app.onrender.com"], // Add domains you use
+    origin: [
+      "http://localhost:1234",
+      "https://tubular-lollipop-16e892.netlify.app",
+      "https://job-portal-app.onrender.com",
+    ], // Add domains you use
     credentials: true,
   })
 );
