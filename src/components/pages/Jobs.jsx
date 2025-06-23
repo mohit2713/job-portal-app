@@ -3,10 +3,13 @@ import { useEffect, useState } from "react";
 
 function Jobs() {
   const [jobs, setJobs] = useState([]);
-  console.log("https://job-portal-app.onrender.com");
+  const API = process.env.PARCEL_API_URL;
+  console.log("API from env:", API);
+  // console.log(import.meta.env);
 
   useEffect(() => {
     fetch("https://job-portal-app-xfux.onrender.com/api/jobs")
+    // fetch(API + "/api/jobs")
       .then((res) => res.json())
       .then((data) => setJobs(data))
       .catch((err) => console.error("Failed to load jobs:", err));
