@@ -13,7 +13,13 @@ const PORT = process.env.PORT || 5050;
 connectDB(); // Will now use MONGO_URI from .env
 
 // ✅ Middlewares
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:1234", "https://job-portal-app.onrender.com"], // Add domains you use
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 
 // ✅ API Routes
