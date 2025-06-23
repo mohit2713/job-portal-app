@@ -5,6 +5,9 @@ function Login({ setUser }) {
   const navigate = useNavigate();
   const [form, setForm] = useState({ email: "", password: "" });
 
+  // 🔑 Use env variable for API
+  const API = process.env.PARCEL_API_URL;
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -16,7 +19,7 @@ function Login({ setUser }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:5050/api/auth/login", {
+      const res = await fetch(`${API}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
@@ -27,13 +30,13 @@ function Login({ setUser }) {
         alert("✅ Login successful!");
         console.log(data);
         localStorage.setItem("token", data.token);
-        localStorage.setItem("user", JSON.stringify(data.user)); // save user data
-        setUser(data.user); // ✅ update App state
+        localStorage.setItem("user", JSON.stringify(data.user));
+        setUser(data.user);
 
         if (data.user.role === "recruiter") {
-          navigate("/post-job"); // 👉 recruiters to post-job
+          navigate("/post-job");
         } else {
-          navigate("/"); // 👉 candidates to homepage
+          navigate("/");
         }
       } else {
         alert("❌ Login failed: " + data.msg);

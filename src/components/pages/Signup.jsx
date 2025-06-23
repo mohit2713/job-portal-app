@@ -10,6 +10,8 @@ function Signup() {
   });
   const navigate = useNavigate();
 
+  const API = process.env.PARCEL_API_URL; // ✅ Get API URL from env
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -17,7 +19,7 @@ function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:5050/api/auth/signup", {
+      const res = await fetch(`${API}/api/auth/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
@@ -26,7 +28,7 @@ function Signup() {
       const data = await res.json();
       if (res.ok) {
         alert("✅ Signup successful!");
-        navigate("/login"); // 👉 Redirect to login
+        navigate("/login");
         console.log(data);
       } else {
         alert("❌ Signup failed: " + data.msg);
