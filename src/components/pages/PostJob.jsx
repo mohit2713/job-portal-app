@@ -11,20 +11,26 @@ function PostJob() {
     description: "",
   });
 
+  const [loading, setLoading] = useState(false); // 🔁 Loader state
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // show loader
     try {
-      const res = await fetch("http://localhost:5050/api/jobs", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(form),
-      });
+      const res = await fetch(
+        "https://job-portal-app-xfux.onrender.com/api/jobs",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(form),
+        }
+      );
 
       if (!res.ok) throw new Error("Failed to post job");
 
@@ -32,7 +38,6 @@ function PostJob() {
       alert("✅ Job posted!");
       console.log(data);
 
-      // ✅ Clear the form
       setForm({
         title: "",
         company: "",
@@ -41,11 +46,12 @@ function PostJob() {
         description: "",
       });
 
-      // ✅ Redirect to home page
       navigate("/");
     } catch (err) {
       alert("❌ Failed to post job");
       console.error(err);
+    } finally {
+      setLoading(false); // hide loader
     }
   };
 
@@ -57,34 +63,68 @@ function PostJob() {
           name="title"
           placeholder="Job Title"
           onChange={handleChange}
+          value={form.title}
           required
         />
         <input
           name="company"
           placeholder="Company"
           onChange={handleChange}
+          value={form.company}
           required
         />
         <input
           name="location"
           placeholder="Location"
           onChange={handleChange}
+          value={form.location}
           required
         />
         <input
           name="type"
           placeholder="Job Type"
           onChange={handleChange}
+          value={form.type}
           required
         />
         <textarea
           name="description"
           placeholder="Job Description"
           onChange={handleChange}
+          value={form.description}
           required
         />
-        <button type="submit" className="bg-blue-600 text-white p-2 rounded">
-          Post Job
+        <button
+          type="submit"
+          disabled={loading}
+          className="bg-blue-600 text-white p-2 rounded cursor-pointer disabled:opacity-60"
+        >
+          {loading ? (
+            <div className="flex items-center justify-center gap-2">
+              <svg
+                className="w-5 h-5 animate-spin text-white"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                ></circle>
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                ></path>
+              </svg>
+              Posting...
+            </div>
+          ) : (
+            "Post Job"
+          )}
         </button>
       </form>
     </div>

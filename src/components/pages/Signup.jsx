@@ -8,9 +8,10 @@ function Signup() {
     password: "",
     role: "candidate",
   });
-  const navigate = useNavigate();
 
-  const API = process.env.PARCEL_API_URL; // ✅ Get API URL from env
+  const [loading, setLoading] = useState(false); // 🔁 loader
+  const navigate = useNavigate();
+  const API = process.env.PARCEL_API_URL2;
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -18,6 +19,7 @@ function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // show loader
     try {
       const res = await fetch(`${API}/api/auth/signup`, {
         method: "POST",
@@ -36,6 +38,8 @@ function Signup() {
     } catch (err) {
       alert("Signup error");
       console.error(err);
+    } finally {
+      setLoading(false); // hide loader
     }
   };
 
@@ -66,8 +70,38 @@ function Signup() {
           <option value="candidate">Candidate</option>
           <option value="recruiter">Recruiter</option>
         </select>
-        <button className="bg-blue-600 text-white p-2 rounded" type="submit">
-          Sign Up
+
+        <button
+          className="bg-blue-600 text-white p-2 rounded cursor-pointer disabled:opacity-60"
+          type="submit"
+          disabled={loading}
+        >
+          {loading ? (
+            <div className="flex items-center justify-center gap-2">
+              <svg
+                className="w-5 h-5 animate-spin text-white"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                ></circle>
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                ></path>
+              </svg>
+              Signing up...
+            </div>
+          ) : (
+            "Sign Up"
+          )}
         </button>
       </form>
     </div>
