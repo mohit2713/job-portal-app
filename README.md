@@ -1,5 +1,5 @@
 # 🧑‍💼 Job Portal Web App (Developing Phase)
-# Demo link:https://tubular-lollipop-16e892.netlify.app/
+# Demo link: https://tubular-lollipop-16e892.netlify.app/
 
 
 A Full-stack job portal application built using **React (with Parcel)** on the frontend and **Node.js + Express + MongoDB** on the backend. This project is aimed at helping users view and apply for jobs, and companies to post job listings.
