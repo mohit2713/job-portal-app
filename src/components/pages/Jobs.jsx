@@ -3,18 +3,41 @@ import { useEffect, useState } from "react";
 
 function Jobs() {
   const [jobs, setJobs] = useState([]);
+  const [loading, setLoading] = useState(true); // 🔁 loader
+
   const API = process.env.PARCEL_API_URL;
   console.log("API from env:", API);
   // console.log(import.meta.env);
 
+  async function fetchData() {
+    try {
+      const res = await fetch(
+        "https://job-portal-app-xfux.onrender.com/api/jobs"
+      );
+      // fetch(API + "/api/jobs")
+      const data = await res.json();
+      setJobs(data);
+    } catch (error) {
+      console.error("Failed to load jobs:", error);
+    } finally {
+      setLoading(false); // after data is loaded
+    }
+  }
+
   useEffect(() => {
-    fetch("https://job-portal-app-xfux.onrender.com/api/jobs")
-    // fetch(API + "/api/jobs")
-      .then((res) => res.json())
-      .then((data) => setJobs(data))
-      .catch((err) => console.error("Failed to load jobs:", err));
+    fetchData();
   }, []);
 
+  if (loading) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+        <p className="mt-4 text-xl font-semibold text-blue-700">
+          Loading, Please Wait...
+        </p>
+      </div>
+    );
+  }
   return (
     <div className="p-6 max-w- mx-aut">
       <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">
